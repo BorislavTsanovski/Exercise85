@@ -15,13 +15,20 @@ using NUnit.Framework;
 public class TC01IfUserIsInvalidTryAgainTest
 {
     private IWebDriver driver;
+    private ChromeOptions options = new ChromeOptions();
     public IDictionary<string, object> vars { get; private set; }
     private IJavaScriptExecutor js;
 
     [SetUp]
     public void SetUp()
     {
-        driver = new ChromeDriver();
+        options.AddArgument("headless");
+        options.AddArgument("no-sandbox");
+        options.AddArgument("disable-dev-shm-usage");
+        options.AddArgument("disable-gpu");
+        options.AddArgument("windows-size=1920x1080");
+
+        driver = new ChromeDriver(options);
         js = (IJavaScriptExecutor)driver;
         vars = new Dictionary<string, object>();
     }
